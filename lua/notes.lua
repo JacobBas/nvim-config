@@ -45,5 +45,4 @@ local win = vim.api.nvim_open_win(buf, true, config)
 -- opening up the notes file within the new buffer; since we are already
 -- focusing on the new buffer, all that we have to do to open the file
 -- into that buffer is the below vim command
--- vim.cmd [[e test.md]]
-vim.cmd [[terminal]]
+vim.cmd [[e test.md]]
