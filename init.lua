@@ -67,5 +67,5 @@ cmd 'colorscheme gruvbox'
 
 ----------------------------- CUSTOM LUA IMPORTS ---------------------------------------------
 -- custom lua imports built by me!
-require 'statusline'
+require('statusline')
 
