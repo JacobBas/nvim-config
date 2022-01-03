@@ -34,7 +34,7 @@ opt.smartindent = true
 opt.wrap = false
 opt.hlsearch = false
 opt.scrolloff = 8
-opt.relativenumber = true
+opt.number = true
 
 opt.swapfile = false
 opt.backup = false
