@@ -15,3 +15,8 @@ available within lua and vim script.
 Other than that, the Neovim documentation is pretty comprehensive and worth the read if
 you want to configure nvim yourself.
 
+## Backlog Items
+- For neo-notes I want to see if I can put in a navigation menu so that it is easier
+to switch between different notes files within the directory. Also, since tree-sitter has been
+introduced into neovim is might be a cool project to see if there is an easy way to handle
+working with markdown files in terms of searching through stuff.
