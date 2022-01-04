@@ -23,6 +23,8 @@ local opt = vim.opt -- to set options
 cmd 'syntax on'
 cmd 'filetype indent plugin on'
 
+g.mapleader = ","
+
 opt.modifiable = true
 opt.belloff = 'all'
 opt.errorbells = false
@@ -67,5 +69,9 @@ cmd 'colorscheme gruvbox'
 
 ----------------------------- CUSTOM LUA IMPORTS ---------------------------------------------
 -- custom lua imports built by me!
+-- other plugins can also be found imported in through the plugin folder
+-- for more documentation on how these imports and assignments work type in :h runtimepath
+
+-- pure lua status line configuration
 require('statusline')
 
