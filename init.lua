@@ -23,7 +23,8 @@ local opt = vim.opt -- to set options
 cmd 'syntax on'
 cmd 'filetype indent plugin on'
 
-g.mapleader = ","
+vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = false })
+g.mapleader = " "
 
 opt.modifiable = true
 opt.belloff = 'all'
@@ -43,8 +44,9 @@ opt.backup = false
 
 opt.colorcolumn = '95'
 opt.signcolumn = 'yes'
-cmd 'highlight ColorColumn ctermbg=0 guibg=lightgrey'
+cmd('highlight ColorColumn ctermbg=0 guibg=lightgrey')
 
+g.python3_host_prog = '/usr/bin/python3' 
 
 ----------------------------- PLUGINS --------------------------------------------------------
 -- link below is a good resource for using vim-plug within init.lua:
@@ -53,18 +55,20 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
-Plug 'sheerun/vim-polyglot' -- syntax support/
-Plug 'scrooloose/NERDTree'  -- file explorer
-Plug 'morhetz/gruvbox'      -- gruvbox theme
-Plug 'fatih/vim-go'         -- golang support   
+Plug 'sheerun/vim-polyglot'  -- syntax support
+Plug 'scrooloose/NERDTree'   -- file explorer
+Plug 'morhetz/gruvbox'       -- gruvbox theme
+Plug 'fatih/vim-go'          -- golang support   
+
+Plug('neoclide/coc.nvim', {branch = 'release'}) -- for lsp
 
 vim.call('plug#end')
 
 
 ----------------------------- COLOR THEME ----------------------------------------------------
+cmd 'colorscheme gruvbox'
 opt.background = 'dark'
 opt.termguicolors = true
-cmd 'colorscheme gruvbox'
 
 
 ----------------------------- CUSTOM LUA IMPORTS ---------------------------------------------
@@ -74,4 +78,3 @@ cmd 'colorscheme gruvbox'
 
 -- pure lua status line configuration
 require('statusline')
-
