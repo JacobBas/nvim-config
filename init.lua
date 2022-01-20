@@ -62,6 +62,11 @@ Plug 'fatih/vim-go'          -- golang support
 
 Plug('neoclide/coc.nvim', {branch = 'release'}) -- for lsp
 
+Plug 'nvim-lua/plenary.nvim'           -- for fuzzy finder
+Plug 'nvim-telescope/telescope.nvim'   -- for fuzzy finder
+Plug 'sharkdp/fd'                      -- optional for fuzzy finder: finder
+Plug 'nvim-treesitter/nvim-treesitter' -- optional for fuzzy finder: finder/preview
+
 vim.call('plug#end')
 
 
@@ -70,6 +75,14 @@ cmd 'colorscheme gruvbox'
 opt.background = 'dark'
 opt.termguicolors = true
 
+
+----------------------------- TELESCOPE SETTINGS ---------------------------------------------
+cmd([[
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+]])
 
 ----------------------------- CUSTOM LUA IMPORTS ---------------------------------------------
 -- custom lua imports built by me!
