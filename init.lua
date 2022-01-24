@@ -48,6 +48,7 @@ cmd('highlight ColorColumn ctermbg=0 guibg=lightgrey')
 
 g.python3_host_prog = '/usr/bin/python3' 
 
+
 ----------------------------- PLUGINS --------------------------------------------------------
 -- link below is a good resource for using vim-plug within init.lua:
 -- https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom
@@ -60,7 +61,10 @@ Plug 'scrooloose/NERDTree'   -- file explorer
 Plug 'morhetz/gruvbox'       -- gruvbox theme
 Plug 'fatih/vim-go'          -- golang support   
 
-Plug('neoclide/coc.nvim', {branch = 'release'}) -- for lsp
+Plug 'neovim/nvim-lspconfig'           -- nvim lsp
+Plug 'williamboman/nvim-lsp-installer' -- creates an LspInstall command
+
+-- Plug('neoclide/coc.nvim', {branch = 'release'}) -- for lsp
 
 Plug 'nvim-lua/plenary.nvim'           -- for fuzzy finder
 Plug 'nvim-telescope/telescope.nvim'   -- for fuzzy finder
@@ -76,6 +80,16 @@ opt.background = 'dark'
 opt.termguicolors = true
 
 
+----------------------------- CUSTOM MAPPINGS ------------------------------------------------
+-- maps a key to a command
+-- @input type: the mode to work in
+-- @input key: the command to use the command
+-- @input value: the command to call on input
+local map = function(type, key, value)
+	vim.fn.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
+end
+
+
 ----------------------------- TELESCOPE SETTINGS ---------------------------------------------
 cmd([[
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
@@ -83,11 +97,3 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 ]])
-
------------------------------ CUSTOM LUA IMPORTS ---------------------------------------------
--- custom lua imports built by me!
--- other plugins can also be found imported in through the plugin folder
--- for more documentation on how these imports and assignments work type in :h runtimepath
-
--- pure lua status line configuration
-require('statusline')
