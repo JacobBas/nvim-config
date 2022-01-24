@@ -64,8 +64,6 @@ Plug 'fatih/vim-go'          -- golang support
 Plug 'neovim/nvim-lspconfig'           -- nvim lsp
 Plug 'williamboman/nvim-lsp-installer' -- creates an LspInstall command
 
--- Plug('neoclide/coc.nvim', {branch = 'release'}) -- for lsp
-
 Plug 'nvim-lua/plenary.nvim'           -- for fuzzy finder
 Plug 'nvim-telescope/telescope.nvim'   -- for fuzzy finder
 Plug 'sharkdp/fd'                      -- optional for fuzzy finder: finder
@@ -75,9 +73,9 @@ vim.call('plug#end')
 
 
 ----------------------------- COLOR THEME ----------------------------------------------------
+-- opt.termguicolors = true
+-- opt.termguicolors = true
 cmd 'colorscheme gruvbox'
-opt.background = 'dark'
-opt.termguicolors = true
 
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
