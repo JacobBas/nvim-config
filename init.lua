@@ -57,6 +57,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
 Plug 'scrooloose/NERDTree'   -- [x] file explorer
+Plug 'tpope/vim-fugitive'    -- [X] for working with Git
 
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
@@ -66,7 +67,14 @@ Plug 'williamboman/nvim-lsp-installer' -- [ ] creates an LspInstall command
 --  ✓ gopls
 --  ✓ jedi_language_server
 --  ✓ rust_analyzer
-Plug 'glepnir/lspsaga.nvim'            -- [ ] make the lsp ui look pretty
+Plug 'hrsh7th/cmp-nvim-lsp'            -- [ ] cmp nvim 
+Plug 'hrsh7th/cmp-buffer'              -- [ ] cmp for buffers
+Plug 'hrsh7th/cmp-path'                -- [ ] cmp for paths
+Plug 'hrsh7th/cmp-cmdline'             -- [ ] cmp for command line
+Plug 'hrsh7th/nvim-cmp'                -- [ ] cmp nvim plugin
+Plug 'hrsh7th/cmp-vsnip'               -- [ ] cmp snippets
+Plug 'hrsh7th/vim-vsnip'               -- [ ] cmp snippets
+-- Plug 'glepnir/lspsaga.nvim'            -- [ ] make the lsp ui look pretty
 
 Plug 'nvim-lua/plenary.nvim'                    -- [x] for fuzzy finder
 Plug 'nvim-telescope/telescope.nvim'            -- [x] for fuzzy finder
@@ -87,19 +95,21 @@ cmd 'colorscheme gruvbox'
 
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
--- maps a key to a command
--- @input type: the mode to work in
--- @input key: the command to use the command
--- @input value: the command to call on input
-local map = function(type, key, value)
-	vim.fn.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
+function map(mode, lhs, rhs, opts)
+    -- creating the mapping options
+    local options = { noremap = true , silent = true }
+    -- adding in extra options to the defaults
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+    -- creating the keymapping
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 
 ----------------------------- TELESCOPE SETTINGS ---------------------------------------------
-cmd([[
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-]])
+map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {})
+map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {})
+map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {})
+map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {})
+
