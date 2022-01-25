@@ -56,18 +56,26 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
-Plug 'sheerun/vim-polyglot'  -- syntax support
-Plug 'scrooloose/NERDTree'   -- file explorer
-Plug 'morhetz/gruvbox'       -- gruvbox theme
-Plug 'fatih/vim-go'          -- golang support   
+Plug 'scrooloose/NERDTree'   -- [x] file explorer
 
-Plug 'neovim/nvim-lspconfig'           -- nvim lsp
-Plug 'williamboman/nvim-lsp-installer' -- creates an LspInstall command
+Plug 'sheerun/vim-polyglot'  -- [x] syntax support
+Plug 'fatih/vim-go'          -- [x] golang support   
 
-Plug 'nvim-lua/plenary.nvim'           -- for fuzzy finder
-Plug 'nvim-telescope/telescope.nvim'   -- for fuzzy finder
-Plug 'sharkdp/fd'                      -- optional for fuzzy finder: finder
-Plug 'nvim-treesitter/nvim-treesitter' -- optional for fuzzy finder: finder/preview
+Plug 'neovim/nvim-lspconfig'           -- [ ] nvim lsp
+Plug 'williamboman/nvim-lsp-installer' -- [ ] creates an LspInstall command
+--  ✓ gopls
+--  ✓ jedi_language_server
+--  ✓ rust_analyzer
+Plug 'glepnir/lspsaga.nvim'            -- [ ] make the lsp ui look pretty
+
+Plug 'nvim-lua/plenary.nvim'                    -- [x] for fuzzy finder
+Plug 'nvim-telescope/telescope.nvim'            -- [x] for fuzzy finder
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'sharkdp/fd'                               -- [x] optional: finder
+Plug 'nvim-treesitter/nvim-treesitter'          -- [x] optional: finder/preview
+Plug 'nvim-lua/popup.nvim'
+
+Plug 'morhetz/gruvbox' -- [x] gruvbox theme
 
 vim.call('plug#end')
 
