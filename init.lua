@@ -106,6 +106,15 @@ function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+-- creating, resizing, and moving between windows
+map("n", "<leader>wv", "<cmd>:vsplit<cr>", {})
+map("n", "<leader>wh", "<cmd>:split<cr>", {})
+
+map("n", "<leader>w<Left>", "<C-w>h", {})
+map("n", "<leader>w<Right>", "<C-w>l", {})
+map("n", "<leader>w<Down>", "<C-w>j", {})
+map("n", "<leader>w<Up>", "<C-w>k", {})
+
 
 ----------------------------- TELESCOPE SETTINGS ---------------------------------------------
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {})
