@@ -5,6 +5,9 @@ local servers = {
 	"rust_analyzer",        -- rust
 	"gopls",                -- go 
 	"jedi_language_server", -- python
+    "eslint",               -- javascript/typescript
+    "html",                 -- html
+    "cssls",                -- css
 }
 
 lsp_installer.settings({
