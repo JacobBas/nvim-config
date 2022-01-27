@@ -50,23 +50,21 @@ g.python3_host_prog = '/usr/bin/python3'
 
 
 ----------------------------- PLUGINS --------------------------------------------------------
--- link below is a good resource for using vim-plug within init.lua:
--- https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
 Plug 'scrooloose/NERDTree'   -- [x] file explorer
-Plug 'tpope/vim-fugitive'    -- [X] for working with Git
+Plug 'tpope/vim-fugitive'    -- [x] for working with Git
+Plug 'tpope/vim-commentary'  -- [x] for easy comments within files
+Plug 'tpope/vim-surround'    -- [x] for surrounding code
+Plug 'sbdchd/neoformat'      -- [x] for autoformating code
 
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
 
 Plug 'neovim/nvim-lspconfig'           -- [ ] nvim lsp
 Plug 'williamboman/nvim-lsp-installer' -- [ ] creates an LspInstall command
---  ✓ gopls
---  ✓ jedi_language_server
---  ✓ rust_analyzer
 Plug 'hrsh7th/cmp-nvim-lsp'            -- [ ] cmp nvim 
 Plug 'hrsh7th/cmp-buffer'              -- [ ] cmp for buffers
 Plug 'hrsh7th/cmp-path'                -- [ ] cmp for paths
@@ -74,7 +72,6 @@ Plug 'hrsh7th/cmp-cmdline'             -- [ ] cmp for command line
 Plug 'hrsh7th/nvim-cmp'                -- [ ] cmp nvim plugin
 Plug 'hrsh7th/cmp-vsnip'               -- [ ] cmp snippets
 Plug 'hrsh7th/vim-vsnip'               -- [ ] cmp snippets
--- Plug 'glepnir/lspsaga.nvim'            -- [ ] make the lsp ui look pretty
 
 Plug 'nvim-lua/plenary.nvim'                    -- [x] for fuzzy finder
 Plug 'nvim-telescope/telescope.nvim'            -- [x] for fuzzy finder
@@ -83,7 +80,10 @@ Plug 'sharkdp/fd'                               -- [x] optional: finder
 Plug 'nvim-treesitter/nvim-treesitter'          -- [x] optional: finder/preview
 Plug 'nvim-lua/popup.nvim'
 
-Plug 'morhetz/gruvbox' -- [x] gruvbox theme
+-- some other nice themes to use: https://github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
+-- Plug 'morhetz/gruvbox'          -- [x] gruvbox theme
+Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
+-- Plug 'projekt0n/github-nvim-theme' -- [x] github theme
 
 vim.call('plug#end')
 
@@ -91,7 +91,9 @@ vim.call('plug#end')
 ----------------------------- COLOR THEME ----------------------------------------------------
 -- opt.termguicolors = true
 -- opt.termguicolors = true
-cmd 'colorscheme gruvbox'
+-- cmd 'colorscheme gruvbox'
+cmd 'colorscheme OceanicNext'
+-- cmd 'colorscheme github_*'
 
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
@@ -117,6 +119,8 @@ map("n", "<leader>w<Up>", "<C-w>k", {})
 
 
 ----------------------------- TELESCOPE SETTINGS ---------------------------------------------
+-- need to make sure the ripgrep is installed onto the machine so that you can 
+-- use live_grep within telescope.
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {})
 map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {})
 map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {})
