@@ -108,6 +108,8 @@ end
 
 
 ----------------------------- TELESCOPE SETTINGS ---------------------------------------------
+-- need to make sure the ripgrep is installed onto the machine so that you can 
+-- use live_grep within telescope.
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {})
 map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {})
 map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {})
