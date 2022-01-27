@@ -82,8 +82,8 @@ Plug 'nvim-lua/popup.nvim'
 
 -- some other nice themes to use: https://github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
 -- Plug 'morhetz/gruvbox'          -- [x] gruvbox theme
--- Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
-Plug 'projekt0n/github-nvim-theme' -- [x] github theme
+Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
+-- Plug 'projekt0n/github-nvim-theme' -- [x] github theme
 
 vim.call('plug#end')
 
@@ -92,8 +92,8 @@ vim.call('plug#end')
 -- opt.termguicolors = true
 -- opt.termguicolors = true
 -- cmd 'colorscheme gruvbox'
--- cmd 'colorscheme OceanicNext'
-cmd 'colorscheme github_*'
+cmd 'colorscheme OceanicNext'
+-- cmd 'colorscheme github_*'
 
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
