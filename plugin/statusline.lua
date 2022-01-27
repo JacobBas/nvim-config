@@ -13,7 +13,7 @@ function status_line()
     "%M",
     "%#Cursor#",
     "%#CursorLine#",
-    "  %t ",
+    "  %F ",
     "%=",
     "%#CursorLine#",
     "  %Y ",
