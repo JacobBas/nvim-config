@@ -57,16 +57,15 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
 Plug 'scrooloose/NERDTree'   -- [x] file explorer
-Plug 'tpope/vim-fugitive'    -- [X] for working with Git
+Plug 'tpope/vim-fugitive'    -- [x] for working with Git
+Plug 'tpope/vim-commentary'  -- [x] for easy comments within files
+Plug 'tpope/vim-surround'    -- [x] for surrounding code
 
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
 
 Plug 'neovim/nvim-lspconfig'           -- [ ] nvim lsp
 Plug 'williamboman/nvim-lsp-installer' -- [ ] creates an LspInstall command
---  ✓ gopls
---  ✓ jedi_language_server
---  ✓ rust_analyzer
 Plug 'hrsh7th/cmp-nvim-lsp'            -- [ ] cmp nvim 
 Plug 'hrsh7th/cmp-buffer'              -- [ ] cmp for buffers
 Plug 'hrsh7th/cmp-path'                -- [ ] cmp for paths
