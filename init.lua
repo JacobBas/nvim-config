@@ -81,8 +81,8 @@ Plug 'nvim-treesitter/nvim-treesitter'          -- [x] optional: finder/preview
 Plug 'nvim-lua/popup.nvim'
 
 -- some other nice themes to use: https://github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
--- Plug 'morhetz/gruvbox'          -- [x] gruvbox theme
-Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
+Plug 'morhetz/gruvbox'          -- [x] gruvbox theme
+-- Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
 -- Plug 'projekt0n/github-nvim-theme' -- [x] github theme
 
 vim.call('plug#end')
@@ -91,8 +91,8 @@ vim.call('plug#end')
 ----------------------------- COLOR THEME ----------------------------------------------------
 opt.background = 'dark'
 -- opt.termguicolors = true
--- cmd 'colorscheme gruvbox'
-cmd 'colorscheme OceanicNext'
+cmd 'colorscheme gruvbox'
+-- cmd 'colorscheme OceanicNext'
 -- cmd 'colorscheme github_*'
 
 
