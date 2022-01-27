@@ -89,7 +89,7 @@ vim.call('plug#end')
 
 
 ----------------------------- COLOR THEME ----------------------------------------------------
--- opt.termguicolors = true
+opt.background = 'dark'
 -- opt.termguicolors = true
 -- cmd 'colorscheme gruvbox'
 cmd 'colorscheme OceanicNext'
