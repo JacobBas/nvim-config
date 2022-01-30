@@ -8,6 +8,7 @@ local servers = {
     "eslint",               -- javascript/typescript
     "html",                 -- html
     "cssls",                -- css
+    "sumneko-lua",          -- lua
 }
 
 lsp_installer.settings({
@@ -122,4 +123,27 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
 capabilities = capabilities
+}
+
+
+----------------------------- TREESITTER PLAYGROUND ------------------------------------------
+require "nvim-treesitter.configs".setup {
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
+  }
 }
