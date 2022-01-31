@@ -59,8 +59,9 @@ Plug 'tpope/vim-commentary'  -- [x] for easy comments within files
 Plug 'tpope/vim-surround'    -- [x] for surrounding code
 Plug 'sbdchd/neoformat'      -- [x] for autoformating code
 
-Plug 'tpope/vim-fugitive'           -- [x] for working with Git
-Plug 'airblade/vim-gitgutter'       -- [x] git gutter
+Plug 'tpope/vim-fugitive'     -- [x] for working with Git
+Plug 'airblade/vim-gitgutter' -- [x] git gutter
+Plug 'sindrets/diffview.nvim' -- [x] for showing git diffs
 
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
