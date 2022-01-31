@@ -62,6 +62,7 @@ Plug 'sbdchd/neoformat'      -- [x] for autoformating code
 
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
+Plug 'rust-lang/rust.vim'    -- [x] rust support
 
 Plug 'neovim/nvim-lspconfig'           -- [ ] nvim lsp
 Plug 'williamboman/nvim-lsp-installer' -- [ ] creates an LspInstall command
@@ -78,6 +79,7 @@ Plug 'nvim-telescope/telescope.nvim'            -- [x] for fuzzy finder
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'sharkdp/fd'                               -- [x] optional: finder
 Plug 'nvim-treesitter/nvim-treesitter'          -- [x] optional: finder/preview
+Plug 'nvim-treesitter/playground'               -- [x] for looking through tree-sitter output
 Plug 'nvim-lua/popup.nvim'
 
 -- some other nice themes to use: https://github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
