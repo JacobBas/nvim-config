@@ -84,6 +84,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'morhetz/gruvbox'          -- [x] gruvbox theme
 -- Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
 -- Plug 'projekt0n/github-nvim-theme' -- [x] github theme
+-- Plug 'sainnhe/everforest'       -- [x] everforest theme
 
 vim.call('plug#end')
 
@@ -94,7 +95,6 @@ opt.background = 'dark'
 cmd 'colorscheme gruvbox'
 -- cmd 'colorscheme OceanicNext'
 -- cmd 'colorscheme github_*'
-
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
 function map(mode, lhs, rhs, opts)
