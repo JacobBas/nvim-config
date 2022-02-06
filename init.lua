@@ -56,12 +56,15 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
 Plug 'scrooloose/NERDTree'     -- [x] file explorer
-Plug 'tpope/vim-fugitive'      -- [x] for working with Git
 Plug 'tpope/vim-commentary'    -- [x] for easy comments within files
 Plug 'tpope/vim-surround'      -- [x] for surrounding code
 Plug 'sbdchd/neoformat'        -- [x] for autoformating code
+Plug 'nvim-neorg/neorg'        -- [x] for notetaking within nvim
 
-Plug 'nvim-neorg/neorg' -- [x] for notetaking within nvim
+Plug 'tpope/vim-fugitive'          -- [x] for working with Git
+Plug 'airblade/vim-gitgutter'      -- [x] git gutter
+Plug 'sindrets/diffview.nvim'      -- [x] for showing git diffs
+Plug 'Xuyuanp/nerdtree-git-plugin' -- [x] git status within nerdtree
 
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
@@ -89,6 +92,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'morhetz/gruvbox'          -- [x] gruvbox theme
 -- Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
 -- Plug 'projekt0n/github-nvim-theme' -- [x] github theme
+-- Plug 'sainnhe/everforest'       -- [x] everforest theme
 
 vim.call('plug#end')
 
@@ -99,7 +103,6 @@ opt.background = 'dark'
 cmd 'colorscheme gruvbox'
 -- cmd 'colorscheme OceanicNext'
 -- cmd 'colorscheme github_*'
-
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
 function map(mode, lhs, rhs, opts)
