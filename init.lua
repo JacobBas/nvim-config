@@ -60,6 +60,7 @@ Plug 'tpope/vim-commentary'    -- [x] for easy comments within files
 Plug 'tpope/vim-surround'      -- [x] for surrounding code
 Plug 'sbdchd/neoformat'        -- [x] for autoformating code
 Plug 'nvim-neorg/neorg'        -- [x] for notetaking within nvim
+Plug 'akinsho/toggleterm.nvim' -- [x] terminal configuration 
 
 Plug 'tpope/vim-fugitive'          -- [x] for working with Git
 Plug 'airblade/vim-gitgutter'      -- [x] git gutter
