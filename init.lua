@@ -38,6 +38,7 @@ opt.wrap = false
 opt.hlsearch = false
 opt.scrolloff = 8
 opt.number = true
+opt.hidden = true
 
 opt.swapfile = false
 opt.backup = false
@@ -54,11 +55,13 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
-Plug 'scrooloose/NERDTree'   -- [x] file explorer
-Plug 'tpope/vim-fugitive'    -- [x] for working with Git
-Plug 'tpope/vim-commentary'  -- [x] for easy comments within files
-Plug 'tpope/vim-surround'    -- [x] for surrounding code
-Plug 'sbdchd/neoformat'      -- [x] for autoformating code
+Plug 'scrooloose/NERDTree'     -- [x] file explorer
+Plug 'tpope/vim-fugitive'      -- [x] for working with Git
+Plug 'tpope/vim-commentary'    -- [x] for easy comments within files
+Plug 'tpope/vim-surround'      -- [x] for surrounding code
+Plug 'sbdchd/neoformat'        -- [x] for autoformating code
+
+Plug 'nvim-neorg/neorg' -- [x] for notetaking within nvim
 
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
