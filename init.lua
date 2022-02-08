@@ -89,12 +89,12 @@ Plug 'nvim-treesitter/playground'               -- [x] for looking through tree-
 Plug 'nvim-lua/popup.nvim'
 
 Plug 'nvim-neorg/neorg' -- [x] for notetaking within nvim; this needs to be after tree-sitter
+Plug 'nvim-neorg/neorg-telescope' -- [x] telescope integration with neorg
 
--- some other nice themes to use: https://github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
-Plug 'morhetz/gruvbox'          -- [x] gruvbox theme
+-- Plug 'morhetz/gruvbox' -- [x] gruvbox theme
 -- Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
 -- Plug 'projekt0n/github-nvim-theme' -- [x] github theme
--- Plug 'sainnhe/everforest'       -- [x] everforest theme
+Plug 'sainnhe/everforest' -- [x] everforest theme
 
 vim.call('plug#end')
 
@@ -102,9 +102,10 @@ vim.call('plug#end')
 ----------------------------- COLOR THEME ----------------------------------------------------
 opt.background = 'dark'
 -- opt.termguicolors = true
-cmd 'colorscheme gruvbox'
+-- cmd 'colorscheme gruvbox'
 -- cmd 'colorscheme OceanicNext'
 -- cmd 'colorscheme github_*'
+cmd 'colorscheme everforest'
 
 ----------------------------- TREE-SITTER ----------------------------------------------------
 require('nvim-treesitter.configs').setup {
