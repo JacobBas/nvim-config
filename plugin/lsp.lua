@@ -9,6 +9,7 @@ local servers = {
     "html",                 -- html
     "cssls",                -- css
     "sumneko-lua",          -- lua
+    "norg",                 -- neorg
 }
 
 lsp_installer.settings({

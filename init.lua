@@ -118,13 +118,15 @@ function map(mode, lhs, rhs, opts)
 end
 
 -- creating, resizing, and moving between windows
-map("n", "<leader>wv", "<cmd>:vsplit<cr>", {})
-map("n", "<leader>wh", "<cmd>:split<cr>", {})
+map("n", "<leader>wv", "<cmd>:vsplit<cr>", {}) -- split window vertically
+map("n", "<leader>wh", "<cmd>:split<cr>", {})  -- split window horizontally
 
-map("n", "<leader>w<Left>", "<C-w>h", {})
-map("n", "<leader>w<Right>", "<C-w>l", {})
-map("n", "<leader>w<Down>", "<C-w>j", {})
-map("n", "<leader>w<Up>", "<C-w>k", {})
+map("n", "<leader>w<Left>", "<C-w>h", {})      -- move to left window
+map("n", "<leader>w<Right>", "<C-w>l", {})     -- move to right window 
+map("n", "<leader>w<Down>", "<C-w>j", {})      -- move to down window
+map("n", "<leader>w<Up>", "<C-w>k", {})        -- move to up window
+
+map("n", "<leader>b", "<C-o>", {})             -- go to previous cursor position
 
 
 ----------------------------- TELESCOPE SETTINGS ---------------------------------------------
