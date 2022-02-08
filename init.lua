@@ -59,7 +59,6 @@ Plug 'scrooloose/NERDTree'     -- [x] file explorer
 Plug 'tpope/vim-commentary'    -- [x] for easy comments within files
 Plug 'tpope/vim-surround'      -- [x] for surrounding code
 Plug 'sbdchd/neoformat'        -- [x] for autoformating code
-Plug 'nvim-neorg/neorg'        -- [x] for notetaking within nvim
 Plug 'akinsho/toggleterm.nvim' -- [x] terminal configuration 
 
 Plug 'tpope/vim-fugitive'          -- [x] for working with Git
@@ -89,6 +88,8 @@ Plug 'nvim-treesitter/nvim-treesitter'          -- [x] optional: finder/preview
 Plug 'nvim-treesitter/playground'               -- [x] for looking through tree-sitter output
 Plug 'nvim-lua/popup.nvim'
 
+Plug 'nvim-neorg/neorg' -- [x] for notetaking within nvim; this needs to be after tree-sitter
+
 -- some other nice themes to use: https://github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
 Plug 'morhetz/gruvbox'          -- [x] gruvbox theme
 -- Plug 'mhartington/oceanic-next' -- [x] oceanic theme 
@@ -104,6 +105,12 @@ opt.background = 'dark'
 cmd 'colorscheme gruvbox'
 -- cmd 'colorscheme OceanicNext'
 -- cmd 'colorscheme github_*'
+
+----------------------------- TREE-SITTER ----------------------------------------------------
+require('nvim-treesitter.configs').setup {
+    ensure_installed = { "norg", "python", "go", "rust" },
+    highlight = { enable = true },
+}
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
 function map(mode, lhs, rhs, opts)
