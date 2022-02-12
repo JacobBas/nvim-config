@@ -1,4 +1,6 @@
-let g:theprimeagen_colorscheme = "gruvbox"
+" this file is from The Primeagen so I'm not 100% on what is going on here 
+
+let g:colorscheme = "gruvbox"
 fun! ColorMyPencils()
     let g:gruvbox_contrast_dark = 'hard'
     if exists('+termguicolors')
@@ -8,12 +10,7 @@ fun! ColorMyPencils()
     let g:gruvbox_invert_selection='0'
 
     set background=dark
-    if has('nvim')
-        call luaeval('vim.cmd("colorscheme " .. _A[1])', [g:theprimeagen_colorscheme])
-    else
-        " TODO: What the way to use g:theprimeagen_colorscheme
-        colorscheme gruvbox 
-    endif
+    call luaeval('vim.cmd("colorscheme " .. _A[1])', [g:colorscheme])
 
     highlight ColorColumn ctermbg=0 guibg=grey
     hi SignColumn guibg=none
@@ -30,4 +27,4 @@ call ColorMyPencils()
 
 " Vim with me
 nnoremap <leader>cmp :call ColorMyPencils()<CR>
-nnoremap <leader>vwb :let g:theprimeagen_colorscheme =
+nnoremap <leader>vwb :let g:colorscheme =
