@@ -92,6 +92,7 @@ Plug 'nvim-neorg/neorg' -- [x] for notetaking within nvim; this needs to be afte
 Plug 'nvim-neorg/neorg-telescope' -- [x] telescope integration with neorg
 
 Plug 'morhetz/gruvbox' -- [x] gruvbox theme
+Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
 
 vim.call('plug#end')
 
