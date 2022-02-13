@@ -91,11 +91,16 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-neorg/neorg' -- [x] for notetaking within nvim; this needs to be after tree-sitter
 Plug 'nvim-neorg/neorg-telescope' -- [x] telescope integration with neorg
 
+Plug 'kyazdani42/nvim-web-devicons' -- [x] for nice looking icons
+Plug 'nvim-lualine/lualine.nvim' -- [x] for a nice status line
+
 Plug 'morhetz/gruvbox' -- [x] gruvbox theme
 Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
 
 vim.call('plug#end')
 
+-- setting the colorscheme easily
+g.colorscheme = "gruvbox"
 
 ----------------------------- TREE-SITTER ----------------------------------------------------
 require('nvim-treesitter.configs').setup {
