@@ -60,6 +60,7 @@ Plug 'tpope/vim-commentary'    -- [x] for easy comments within files
 Plug 'tpope/vim-surround'      -- [x] for surrounding code
 Plug 'sbdchd/neoformat'        -- [x] for autoformating code
 Plug 'akinsho/toggleterm.nvim' -- [x] terminal configuration 
+Plug 'jpalardy/vim-slime'      -- [x] access to REPL like functionality
 
 Plug 'tpope/vim-fugitive'          -- [x] for working with Git
 Plug 'airblade/vim-gitgutter'      -- [x] git gutter
@@ -101,6 +102,9 @@ vim.call('plug#end')
 
 -- setting the colorscheme easily
 g.colorscheme = "gruvbox"
+
+----------------------------- VIM SLIME ------------------------------------------------------
+g.slime_target = "tmux"
 
 ----------------------------- TREE-SITTER ----------------------------------------------------
 require('nvim-treesitter.configs').setup {
