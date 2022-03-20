@@ -97,11 +97,15 @@ Plug 'nvim-lualine/lualine.nvim' -- [x] for a nice status line
 
 Plug 'morhetz/gruvbox' -- [x] gruvbox theme
 Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
+Plug 'projekt0n/github-nvim-theme' -- [x] github theme
 
 vim.call('plug#end')
 
--- setting the colorscheme easily
-g.colorscheme = "gruvbox"
+-- setting the colorscheme easily; this should be done within the 
+-- plugin/color.vim script
+-- g.colorscheme = "gruvbox"
+-- g.colorscheme = "github_*"
+g.colorscheme = "kanagawa"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
 g.slime_target = "tmux"
