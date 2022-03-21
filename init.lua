@@ -89,15 +89,18 @@ Plug 'nvim-treesitter/nvim-treesitter'          -- [x] optional: finder/preview
 Plug 'nvim-treesitter/playground'               -- [x] for looking through tree-sitter output
 Plug 'nvim-lua/popup.nvim'
 
-Plug 'nvim-neorg/neorg' -- [x] for notetaking within nvim; this needs to be after tree-sitter
-Plug 'nvim-neorg/neorg-telescope' -- [x] telescope integration with neorg
+Plug 'nvim-neorg/neorg'             -- [x] for notetaking within nvim
+Plug 'nvim-neorg/neorg-telescope'   -- [x] telescope integration with neorg
+Plug 'folke/todo-comments.nvim'     -- [x] nice looking todo comments
 
 Plug 'kyazdani42/nvim-web-devicons' -- [x] for nice looking icons
-Plug 'nvim-lualine/lualine.nvim' -- [x] for a nice status line
+Plug 'nvim-lualine/lualine.nvim'    -- [x] for a nice status line
 
 Plug 'morhetz/gruvbox' -- [x] gruvbox theme
 Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
 Plug 'projekt0n/github-nvim-theme' -- [x] github theme
+
+Plug 'ThePrimeagen/vim-be-good' -- [x] vim be good game
 
 vim.call('plug#end')
 
@@ -115,6 +118,10 @@ require('nvim-treesitter.configs').setup {
     ensure_installed = { "norg", "python", "go", "rust" },
     highlight = { enable = true },
 }
+
+
+----------------------------- TODO COMMENTS --------------------------------------------------
+require("todo-comments").setup{}
 
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
