@@ -92,6 +92,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-neorg/neorg'             -- [x] for notetaking within nvim
 Plug 'nvim-neorg/neorg-telescope'   -- [x] telescope integration with neorg
 Plug 'folke/todo-comments.nvim'     -- [x] nice looking todo comments
+Plug 'ggandor/lightspeed.nvim'      -- [x[ for easy vim movements
 
 Plug 'kyazdani42/nvim-web-devicons' -- [x] for nice looking icons
 Plug 'nvim-lualine/lualine.nvim'    -- [x] for a nice status line
