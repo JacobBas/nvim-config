@@ -61,6 +61,7 @@ Plug 'tpope/vim-surround'      -- [x] for surrounding code
 Plug 'sbdchd/neoformat'        -- [x] for autoformating code
 Plug 'akinsho/toggleterm.nvim' -- [x] terminal configuration 
 Plug 'jpalardy/vim-slime'      -- [x] access to REPL like functionality
+Plug 'editorconfig/editorconfig-vim' -- [x] for reading editorconfig files
 
 Plug 'tpope/vim-fugitive'          -- [x] for working with Git
 Plug 'airblade/vim-gitgutter'      -- [x] git gutter
@@ -70,6 +71,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin' -- [x] git status within nerdtree
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
 Plug 'rust-lang/rust.vim'    -- [x] rust support
+Plug 'elixir-editors/vim-elixir' -- [x] elixir support 
 
 Plug 'neovim/nvim-lspconfig'           -- [ ] nvim lsp
 Plug 'williamboman/nvim-lsp-installer' -- [ ] creates an LspInstall command
@@ -96,12 +98,11 @@ Plug 'ggandor/lightspeed.nvim'      -- [x[ for easy vim movements
 
 Plug 'kyazdani42/nvim-web-devicons' -- [x] for nice looking icons
 Plug 'nvim-lualine/lualine.nvim'    -- [x] for a nice status line
+Plug 'kdheepak/lazygit.nvim'        -- [x] lazygit integration
 
 Plug 'morhetz/gruvbox' -- [x] gruvbox theme
 Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
 Plug 'projekt0n/github-nvim-theme' -- [x] github theme
-
-Plug 'ThePrimeagen/vim-be-good' -- [x] vim be good game
 
 vim.call('plug#end')
 
