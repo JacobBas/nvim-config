@@ -6,6 +6,7 @@ require('lualine').setup {
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = true,
+    globalstatus = true,
   },
   sections = {
     lualine_a = {'mode'},
@@ -26,6 +27,8 @@ require('lualine').setup {
   tabline = {},
   extensions = {}
 }
+vim.opt.laststatus = 3 
+vim.cmd('highlight WinSeparator guibg=None')
 
 -- function status_line()
 --     return table.concat {

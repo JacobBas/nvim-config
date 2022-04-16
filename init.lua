@@ -23,7 +23,7 @@ local opt = vim.opt -- to set options
 cmd 'syntax on'
 cmd 'filetype indent plugin on'
 
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = false })
+vim.keymap.set('', '<Space>', '<Nop>', { noremap = true, silent = false })
 g.mapleader = " "
 
 opt.modifiable = true
@@ -93,7 +93,6 @@ Plug 'nvim-lua/popup.nvim'
 
 Plug 'nvim-neorg/neorg'             -- [x] for notetaking within nvim
 Plug 'nvim-neorg/neorg-telescope'   -- [x] telescope integration with neorg
-Plug 'folke/todo-comments.nvim'     -- [x] nice looking todo comments
 Plug 'ggandor/lightspeed.nvim'      -- [x[ for easy vim movements
 
 Plug 'kyazdani42/nvim-web-devicons' -- [x] for nice looking icons
@@ -113,48 +112,33 @@ vim.call('plug#end')
 g.colorscheme = "kanagawa"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
+-- TODO: need to update this to use kitty instead
 g.slime_target = "tmux"
 
 ----------------------------- TREE-SITTER ----------------------------------------------------
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { "norg", "python", "go", "rust" },
+    ensure_installed = { "norg", "python", "go", "rust", "javascript", "elixir" },
     highlight = { enable = true },
 }
 
 
------------------------------ TODO COMMENTS --------------------------------------------------
-require("todo-comments").setup{}
-
-
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
-function map(mode, lhs, rhs, opts)
-    -- creating the mapping options
-    local options = { noremap = true , silent = true }
-    -- adding in extra options to the defaults
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    -- creating the keymapping
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
 -- creating, resizing, and moving between windows
-map("n", "<leader>wv", "<cmd>:vsplit<cr>", {}) -- split window vertically
-map("n", "<leader>wh", "<cmd>:split<cr>", {})  -- split window horizontally
+vim.keymap.set("n", "<leader>wv", "<cmd>:vsplit<cr>", {}) -- split window vertically
+vim.keymap.set("n", "<leader>wh", "<cmd>:split<cr>", {})  -- split window horizontally
 
-map("n", "<leader>w<Left>", "<C-w>h", {})      -- move to left window
-map("n", "<leader>w<Right>", "<C-w>l", {})     -- move to right window 
-map("n", "<leader>w<Down>", "<C-w>j", {})      -- move to down window
-map("n", "<leader>w<Up>", "<C-w>k", {})        -- move to up window
+vim.keymap.set("n", "<leader>w<Left>", "<C-w>h", {})      -- move to left window
+vim.keymap.set("n", "<leader>w<Right>", "<C-w>l", {})     -- move to right window 
+vim.keymap.set("n", "<leader>w<Down>", "<C-w>j", {})      -- move to down window
+vim.keymap.set("n", "<leader>w<Up>", "<C-w>k", {})        -- move to up window
 
-map("n", "<leader>b", "<C-o>", {})             -- go to previous cursor position
+vim.keymap.set("n", "<leader>b", "<C-o>", {})             -- go to previous cursor position
 
 
 ----------------------------- TELESCOPE SETTINGS ---------------------------------------------
 -- need to make sure the ripgrep is installed onto the machine so that you can 
 -- use live_grep within telescope.
-map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {})
-map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {})
-map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {})
-map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {})
-
+vim.keymap.set("n", "<leader>ff", require('telescope.builtin').find_files, {})
+vim.keymap.set("n", "<leader>fg", require('telescope.builtin').live_grep, {})
+vim.keymap.set("n", "<leader>fb", require('telescope.builtin').buffers, {})
+vim.keymap.set("n", "<leader>fh", require('telescope.builtin').help_tags, {})
