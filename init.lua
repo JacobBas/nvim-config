@@ -56,6 +56,8 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
 Plug 'scrooloose/NERDTree'     -- [x] file explorer
+Plug 'Xuyuanp/nerdtree-git-plugin' -- [x] git status within nerdtree
+
 Plug 'tpope/vim-commentary'    -- [x] for easy comments within files
 Plug 'tpope/vim-surround'      -- [x] for surrounding code
 Plug 'sbdchd/neoformat'        -- [x] for autoformating code
@@ -66,7 +68,6 @@ Plug 'editorconfig/editorconfig-vim' -- [x] for reading editorconfig files
 Plug 'tpope/vim-fugitive'          -- [x] for working with Git
 Plug 'airblade/vim-gitgutter'      -- [x] git gutter
 Plug 'sindrets/diffview.nvim'      -- [x] for showing git diffs
-Plug 'Xuyuanp/nerdtree-git-plugin' -- [x] git status within nerdtree
 
 Plug 'sheerun/vim-polyglot'  -- [x] syntax support
 Plug 'fatih/vim-go'          -- [x] golang support   
@@ -117,7 +118,15 @@ g.slime_target = "tmux"
 
 ----------------------------- TREE-SITTER ----------------------------------------------------
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { "norg", "python", "go", "rust", "javascript", "elixir" },
+    ensure_installed = { 
+        "elixir", 
+        "go", 
+        "javascript", 
+        "lua", 
+        "norg", 
+        "python", 
+        "rust" 
+    },
     highlight = { enable = true },
 }
 
