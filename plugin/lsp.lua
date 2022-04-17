@@ -25,29 +25,21 @@ lsp_installer.settings({
 
 ----------------------------- INSTALLING SERVERS ---------------------------------------------
 -- looping through the language servers and installing
-for _, server_name in pairs(servers) do
-  -- checking if the server is available and installing it
+for _, server_name in pairs(servers) do 
   local server_available, server = lsp_installer_servers.get_server(server_name)
-
   if server_available then
     server:on_ready(
-      function ()
-        -- When this particular server is ready (i.e. when installation is finished 
-        -- or the server is already installed) this function will be invoked.
-        -- Make sure not to use the "catch-all" lsp_installer.on_server_ready()
-        -- function to set up servers, to avoid doing setting up a server twice.			
+      function()
         local opts = {}
         server:setup(opts)
       end
       )
 
-    if not server:is_installed() then
-      -- queue the server to be installed
+    if not server:is_installed() then 
       server:install()
     end
   end
 end
-
 
 ----------------------------- CUSTOM MAPPING -------------------------------------------------
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
@@ -70,38 +62,35 @@ local cmp = require'cmp'
 
 cmp.setup({
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        vim.fn["vsnip#anonymous"](args.body)
       end,
     },
     mapping = {
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-y>'] = cmp.config.disable,
       ['<C-e>'] = cmp.mapping({
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
         }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'vsnip' }, -- For vsnip users.
+        { name = 'vsnip' },
       }, {
         { name = 'buffer' },
       })
   })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
     sources = {
       { name = 'buffer' }
     }
   })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
         { name = 'path' }

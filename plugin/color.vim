@@ -29,9 +29,9 @@ fun! ColorMyPencils()
 
         " Change the "hint" color to the "orange" color, and make the "error" color bright red
         let g:github_colors = {
-          \ 'hint': 'orange',
-          \ 'error': '#ff0000'
-        \ }
+                    \ 'hint': 'orange',
+                    \ 'error': '#ff0000'
+                    \ }
 
         colorscheme github_dimmed
     endif
