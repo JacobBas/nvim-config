@@ -2,15 +2,16 @@ local lsp_installer = require("nvim-lsp-installer")
 local lsp_installer_servers = require("nvim-lsp-installer.servers")
 
 local servers = {
-  "rust_analyzer",        -- rust
-  "gopls",                -- go 
-  "jedi_language_server", -- python
-  "eslint",               -- javascript/typescript
-  "tsserver",             -- javascript/typescript
-  "html",                 -- html
   "cssls",                -- css
-  "sumneko-lua",          -- lua
   "elixirls",             -- elixir
+  "eslint",               -- javascript/typescript
+  "gopls",                -- go 
+  "hls",                   -- haskell
+  "html",                 -- html
+  "jedi_language_server", -- python
+  "rust_analyzer",        -- rust
+  "sumneko-lua",          -- lua
+  "tsserver",             -- javascript/typescript
 }
 
 lsp_installer.settings({

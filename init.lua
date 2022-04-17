@@ -121,11 +121,12 @@ require('nvim-treesitter.configs').setup {
     ensure_installed = { 
         "elixir", 
         "go", 
+        "haskell",
         "javascript", 
         "lua", 
         "norg", 
         "python", 
-        "rust" 
+        "rust", 
     },
     highlight = { enable = true },
 }
