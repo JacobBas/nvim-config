@@ -2,127 +2,109 @@ local lsp_installer = require("nvim-lsp-installer")
 local lsp_installer_servers = require("nvim-lsp-installer.servers")
 
 local servers = {
-	"rust_analyzer",        -- rust
-	"gopls",                -- go 
-	"jedi_language_server", -- python
-    "eslint",               -- javascript/typescript
-    "html",                 -- html
-    "cssls",                -- css
-    "sumneko-lua",          -- lua
+  "cssls",                -- css
+  "elixirls",             -- elixir
+  "eslint",               -- javascript/typescript
+  "gopls",                -- go 
+  "hls",                   -- haskell
+  "html",                 -- html
+  "jedi_language_server", -- python
+  "rust_analyzer",        -- rust
+  "sumneko-lua",          -- lua
+  "tsserver",             -- javascript/typescript
 }
 
 lsp_installer.settings({
     ui = {
-        icons = {
-            server_installed = "✓",
-            server_pending = "➜",
-            server_uninstalled = "✗"
-        }
+      icons = {
+        server_installed = "✓",
+        server_pending = "➜",
+        server_uninstalled = "✗"
+      }
     }
-})
-
-function map(mode, lhs, rhs)
-    -- creating the mapping options
-    local options = { noremap = true , silent = true }
-    -- creating the keymapping
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+  })
 
 ----------------------------- INSTALLING SERVERS ---------------------------------------------
 -- looping through the language servers and installing
-for _, server_name in pairs(servers) do
-	-- checking if the server is available and installing it
-	local server_available, server = lsp_installer_servers.get_server(server_name)
-	
-	if server_available then
-		server:on_ready(
-			function ()
-			-- When this particular server is ready (i.e. when installation is finished 
-			-- or the server is already installed) this function will be invoked.
-			-- Make sure not to use the "catch-all" lsp_installer.on_server_ready()
-            -- function to set up servers, to avoid doing setting up a server twice.			
-			local opts = {}
-			server:setup(opts)
-			end
-		)
+for _, server_name in pairs(servers) do 
+  local server_available, server = lsp_installer_servers.get_server(server_name)
+  if server_available then
+    server:on_ready(
+      function()
+        local opts = {}
+        server:setup(opts)
+      end
+      )
 
-		if not server:is_installed() then
-			-- queue the server to be installed
-			server:install()
-		end
-	end
+    if not server:is_installed() then 
+      server:install()
+    end
+  end
 end
 
-
 ----------------------------- CUSTOM MAPPING -------------------------------------------------
-map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
-map('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
-map('n','K','<cmd>lua vim.lsp.buf.hover()<CR>')
-map('n','gr','<cmd>lua vim.lsp.buf.references()<CR>')
-map('n','gs','<cmd>lua vim.lsp.buf.signature_help()<CR>')
-map('n','gi','<cmd>lua vim.lsp.buf.implementation()<CR>')
-map('n','gt','<cmd>lua vim.lsp.buf.type_definition()<CR>')
-map('n','<leader>gw','<cmd>lua vim.lsp.buf.document_symbol()<CR>')
-map('n','<leader>gW','<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
-map('n','<leader>ah','<cmd>lua vim.lsp.buf.hover()<CR>')
-map('n','<leader>af','<cmd>lua vim.lsp.buf.code_action()<CR>')
-map('n','<leader>ee','<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>')
-map('n','<leader>ar','<cmd>lua vim.lsp.buf.rename()<CR>')
-map('n','<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-map('n','<leader>ai','<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
-map('n','<leader>ao','<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
+vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition)
+vim.keymap.set('n', '<leader>ar', vim.lsp.buf.rename, { desc = 'rename all references to an object within a file' })
+
+vim.keymap.set('n', '<leader>gw', vim.lsp.buf.document_symbol)
+vim.keymap.set('n', '<leader>gW', vim.lsp.buf.workspace_symbol)
+vim.keymap.set('n', '<leader>ai', vim.lsp.buf.incoming_calls)
+vim.keymap.set('n', '<leader>ao', vim.lsp.buf.outgoing_calls)
 
 
 ----------------------------- nvim-cmp SETUP -------------------------------------------------
 local cmp = require'cmp'
 
 cmp.setup({
-snippet = {
-  -- REQUIRED - you must specify a snippet engine
-  expand = function(args)
-	vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-  end,
-},
-mapping = {
-  ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-  ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-  ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-  ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-  ['<C-e>'] = cmp.mapping({
-	i = cmp.mapping.abort(),
-	c = cmp.mapping.close(),
-  }),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-},
-sources = cmp.config.sources({
-  { name = 'nvim_lsp' },
-  { name = 'vsnip' }, -- For vsnip users.
-}, {
-  { name = 'buffer' },
-})
-})
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable,
+      ['<C-e>'] = cmp.mapping({
+          i = cmp.mapping.abort(),
+          c = cmp.mapping.close(),
+        }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' },
+      }, {
+        { name = 'buffer' },
+      })
+  })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
-sources = {
-  { name = 'buffer' }
-}
-})
+    sources = {
+      { name = 'buffer' }
+    }
+  })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-sources = cmp.config.sources({
-  { name = 'path' }
-}, {
-  { name = 'cmdline' }
-})
-})
+    sources = cmp.config.sources({
+        { name = 'path' }
+      }, {
+        { name = 'cmdline' }
+      })
+  })
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-capabilities = capabilities
+  capabilities = capabilities
 }
 
 
