@@ -70,7 +70,6 @@ Plug 'sindrets/diffview.nvim'      -- [x] for showing git diffs
 Plug 'sheerun/vim-polyglot'      -- [x] syntax support
 Plug 'fatih/vim-go'              -- [x] golang support
 Plug 'rust-lang/rust.vim'        -- [x] rust support
-Plug 'elixir-editors/vim-elixir' -- [x] elixir support
 
 Plug 'neovim/nvim-lspconfig'    -- [ ] nvim lsp
 Plug 'hrsh7th/cmp-nvim-lsp'     -- [ ] cmp nvim
