@@ -54,15 +54,14 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
-Plug 'scrooloose/NERDTree'     -- [x] file explorer
-Plug 'Xuyuanp/nerdtree-git-plugin' -- [x] git status within nerdtree
+Plug 'scrooloose/NERDTree'          -- [x] file explorer
+Plug 'Xuyuanp/nerdtree-git-plugin'  -- [x] git status within nerdtree
 
-Plug 'tpope/vim-commentary'    -- [x] for easy comments within files
-Plug 'tpope/vim-surround'      -- [x] for surrounding code
-Plug 'sbdchd/neoformat'        -- [x] for autoformating code
-Plug 'akinsho/toggleterm.nvim' -- [x] terminal configuration
-Plug 'jpalardy/vim-slime'      -- [x] access to REPL like functionality
-Plug 'editorconfig/editorconfig-vim' -- [x] for reading editorconfig files
+Plug 'tpope/vim-commentary'             -- [x] for easy comments within files
+Plug 'tpope/vim-surround'               -- [x] for surrounding code
+Plug 'sbdchd/neoformat'                 -- [x] for autoformating code
+Plug 'jpalardy/vim-slime'               -- [x] access to REPL like functionality
+Plug 'editorconfig/editorconfig-vim'    -- [x] for reading editorconfig files
 
 Plug 'tpope/vim-fugitive'          -- [x] for working with Git
 Plug 'airblade/vim-gitgutter'      -- [x] git gutter
