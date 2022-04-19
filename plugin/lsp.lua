@@ -72,7 +72,7 @@ end
 -- SETTING UP THE LANGUAGE SERVERS -----------------------------------------------------------
 -- documentation on how to use language servers
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-local path_to_language_servers = '/home/jacob/.config/nvim/language-servers'
+local path_to_language_servers = '/Users/jacobbas/.config/nvim/language-servers'
 
 -- lua language server
 -- https://github.com/sumneko/lua-language-server
@@ -135,7 +135,7 @@ lspconfig.elixirls.setup({
 -- https://pkg.go.dev/golang.org/x/tools/gopls#section-readme
 -- make sure that gopls in the PATH variable https://hectron.github.io/til/gopls-asdf/
 lspconfig.gopls.setup({
-    cmd = {"gopls"},
+    cmd = {"gopls", "serve"},
     settings = {
       gopls = {
         analyses = {
