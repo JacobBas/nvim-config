@@ -61,7 +61,8 @@ Plug 'tpope/vim-commentary'             -- [x] for easy comments within files
 Plug 'tpope/vim-surround'               -- [x] for surrounding code
 Plug 'sbdchd/neoformat'                 -- [x] for autoformating code
 Plug 'jpalardy/vim-slime'               -- [x] access to REPL like functionality
-Plug 'editorconfig/editorconfig-vim'    -- [x] for reading editorconfig files
+Plug 'editorconfig/editorconfig-vim'    -- [x] for reading editorconfig file
+Plug 'folke/which-key.nvim'             -- [x] completion for available keystrokes
 
 Plug 'tpope/vim-fugitive'          -- [x] for working with Git
 Plug 'airblade/vim-gitgutter'      -- [x] git gutter
@@ -110,8 +111,12 @@ vim.call('plug#end')
 g.colorscheme = "kanagawa"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
--- TODO: need to update this to use kitty instead
-g.slime_target = "tmux"
+g.slime_target = "kitty"
+
+
+----------------------------- VIM SLIME ------------------------------------------------------
+require("which-key").setup{}
+
 
 ----------------------------- TREE-SITTER ----------------------------------------------------
 require('nvim-treesitter.configs').setup {
