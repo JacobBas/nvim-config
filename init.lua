@@ -129,6 +129,7 @@ require('nvim-treesitter.configs').setup {
         "norg",
         "python",
         "rust",
+        "commonlisp",
     },
     highlight = { enable = true },
 }

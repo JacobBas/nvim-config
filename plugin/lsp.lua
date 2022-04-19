@@ -135,7 +135,7 @@ lspconfig.elixirls.setup({
 -- https://pkg.go.dev/golang.org/x/tools/gopls#section-readme
 -- make sure that gopls in the PATH variable https://hectron.github.io/til/gopls-asdf/
 lspconfig.gopls.setup({
-    cmd = {"gopls"},
+    cmd = {"gopls", "serve"},
     settings = {
       gopls = {
         analyses = {
