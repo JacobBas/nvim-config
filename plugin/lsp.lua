@@ -11,7 +11,6 @@ local servers = {
   "jedi_language_server", -- python
   "rust_analyzer",        -- rust
   "sumneko-lua",          -- lua
-  "tsserver",             -- javascript/typescript
 }
 
 lsp_installer.settings({
