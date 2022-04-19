@@ -1,130 +1,157 @@
-local lsp_installer = require("nvim-lsp-installer")
-local lsp_installer_servers = require("nvim-lsp-installer.servers")
+local lspconfig = require('lspconfig')
 
-local servers = {
-  "cssls",                -- css
-  "elixirls",             -- elixir
-  "eslint",               -- javascript/typescript
-  "gopls",                -- go 
-  "hls",                   -- haskell
-  "html",                 -- html
-  "jedi_language_server", -- python
-  "rust_analyzer",        -- rust
-  "sumneko-lua",          -- lua
-}
+-- updating the capabilities so that the lsp knows to use snippets
+-- Setup nvim-cmp.
+local cmp = require'cmp'
 
-lsp_installer.settings({
-    ui = {
-      icons = {
-        server_installed = "✓",
-        server_pending = "➜",
-        server_uninstalled = "✗"
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
+  },
+  mapping = {
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+
+-- A callback that will get called when a buffer connects to the language server.
+-- Here we create any key maps that we want to have on that buffer.
+local on_attach = function(_, _)
+  local map_opts = {noremap = true, silent = true}
+
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, map_opts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, map_opts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, map_opts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, map_opts)
+  vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, map_opts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, map_opts)
+  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, map_opts)
+  vim.keymap.set('n', '<leader>ar', vim.lsp.buf.rename, map_opts)
+
+  -- tell nvim-cmp about our desired capabilities
+  require("cmp_nvim_lsp").update_capabilities(capabilities)
+end
+
+
+-- SETTING UP THE LANGUAGE SERVERS -----------------------------------------------------------
+-- documentation on how to use language servers
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+local path_to_language_servers = '/home/jacob/.config/nvim/language-servers'
+
+-- lua language server
+-- https://github.com/sumneko/lua-language-server
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, 'lua/?.lua')
+table.insert(runtime_path, 'lua/?/init.lua')
+
+lspconfig.sumneko_lua.setup({
+  cmd = {path_to_language_servers .. '/lua-language-server/bin/lua-language-server'},
+  capabilities = capabilities,
+  on_attach = on_attach,
+    settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file('', true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})
+
+
+-- elixir language server
+-- https://github.com/elixir-lsp/elixir-ls
+lspconfig.elixirls.setup({
+    cmd = {path_to_language_servers .. '/elixir-ls/language_server.sh'},
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+      elixirLS = {
+        -- I choose to disable dialyzer for personal reasons, but
+        -- I would suggest you also disable it unless you are well
+        -- aquainted with dialzyer and know how to use it.
+        dialyzerEnabled = false,
+        -- I also choose to turn off the auto dep fetching feature.
+        -- It often get's into a weird state that requires deleting
+        -- the .elixir_ls directory and restarting your editor.
+        fetchDeps = false
       }
     }
   })
 
------------------------------ INSTALLING SERVERS ---------------------------------------------
--- looping through the language servers and installing
-for _, server_name in pairs(servers) do 
-  local server_available, server = lsp_installer_servers.get_server(server_name)
-  if server_available then
-    server:on_ready(
-      function()
-        local opts = {}
-        server:setup(opts)
-      end
-      )
 
-    if not server:is_installed() then 
-      server:install()
-    end
-  end
-end
-
------------------------------ CUSTOM MAPPING -------------------------------------------------
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
-vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition)
-vim.keymap.set('n', '<leader>ar', vim.lsp.buf.rename, { desc = 'rename all references to an object within a file' })
-
-vim.keymap.set('n', '<leader>gw', vim.lsp.buf.document_symbol)
-vim.keymap.set('n', '<leader>gW', vim.lsp.buf.workspace_symbol)
-vim.keymap.set('n', '<leader>ai', vim.lsp.buf.incoming_calls)
-vim.keymap.set('n', '<leader>ao', vim.lsp.buf.outgoing_calls)
-
-
------------------------------ nvim-cmp SETUP -------------------------------------------------
-local cmp = require'cmp'
-
-cmp.setup({
-    snippet = {
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
-      end,
+-- Go language server
+-- go install golang.org/x/tools/gopls@latest
+-- https://pkg.go.dev/golang.org/x/tools/gopls#section-readme
+-- make sure that gopls in the PATH variable https://hectron.github.io/til/gopls-asdf/
+lspconfig.gopls.setup({
+    cmd = {"gopls"},
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
     },
-    mapping = {
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable,
-      ['<C-e>'] = cmp.mapping({
-          i = cmp.mapping.abort(),
-          c = cmp.mapping.close(),
-        }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    },
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'vsnip' },
-      }, {
-        { name = 'buffer' },
-      })
   })
 
-cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })
 
-cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-        { name = 'path' }
-      }, {
-        { name = 'cmdline' }
-      })
-  })
-
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-  capabilities = capabilities
-}
+-- Python language server
+-- npm install -g pyright
+lspconfig.pyright.setup{}
 
 
------------------------------ TREESITTER PLAYGROUND ------------------------------------------
-require "nvim-treesitter.configs".setup {
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-    keybindings = {
-      toggle_query_editor = 'o',
-      toggle_hl_groups = 'i',
-      toggle_injected_languages = 't',
-      toggle_anonymous_nodes = 'a',
-      toggle_language_display = 'I',
-      focus_language = 'f',
-      unfocus_language = 'F',
-      update = 'R',
-      goto_node = '<cr>',
-      show_help = '?',
-    },
-  }
-}
+-- Javascript/Typescrupt language server
+-- npm install -g typescript typescript-language-server
+lspconfig.tsserver.setup{}

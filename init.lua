@@ -8,13 +8,12 @@
 -- 2. make the file more modular by separating out into multiple .lua files
 --
 -- OTHER INFO:
--- helpful links in creating this config: 
+-- helpful links in creating this config:
 -- https://oroques.dev/notes/neovim-init/
 
 
 ----------------------------- LOCAL VARIABLES ------------------------------------------------
 local cmd = vim.cmd -- to exectue vim commands
-local fn = vim.fn   -- to call vim functions
 local g = vim.g     -- a table to access global variables
 local opt = vim.opt -- to set options
 
@@ -47,7 +46,7 @@ opt.colorcolumn = '95'
 opt.signcolumn = 'yes'
 cmd('highlight ColorColumn ctermbg=0 guibg=lightgrey')
 
-g.python3_host_prog = '/usr/bin/python3' 
+g.python3_host_prog = '/usr/bin/python3'
 
 
 ----------------------------- PLUGINS --------------------------------------------------------
@@ -55,34 +54,33 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/autoload/plugged')
 
-Plug 'scrooloose/NERDTree'     -- [x] file explorer
-Plug 'Xuyuanp/nerdtree-git-plugin' -- [x] git status within nerdtree
+Plug 'scrooloose/NERDTree'          -- [x] file explorer
+Plug 'Xuyuanp/nerdtree-git-plugin'  -- [x] git status within nerdtree
 
-Plug 'tpope/vim-commentary'    -- [x] for easy comments within files
-Plug 'tpope/vim-surround'      -- [x] for surrounding code
-Plug 'sbdchd/neoformat'        -- [x] for autoformating code
-Plug 'akinsho/toggleterm.nvim' -- [x] terminal configuration 
-Plug 'jpalardy/vim-slime'      -- [x] access to REPL like functionality
-Plug 'editorconfig/editorconfig-vim' -- [x] for reading editorconfig files
+Plug 'tpope/vim-commentary'             -- [x] for easy comments within files
+Plug 'tpope/vim-surround'               -- [x] for surrounding code
+Plug 'sbdchd/neoformat'                 -- [x] for autoformating code
+Plug 'jpalardy/vim-slime'               -- [x] access to REPL like functionality
+Plug 'editorconfig/editorconfig-vim'    -- [x] for reading editorconfig file
+Plug 'folke/which-key.nvim'             -- [x] completion for available keystrokes
 
 Plug 'tpope/vim-fugitive'          -- [x] for working with Git
 Plug 'airblade/vim-gitgutter'      -- [x] git gutter
 Plug 'sindrets/diffview.nvim'      -- [x] for showing git diffs
 
-Plug 'sheerun/vim-polyglot'  -- [x] syntax support
-Plug 'fatih/vim-go'          -- [x] golang support   
-Plug 'rust-lang/rust.vim'    -- [x] rust support
-Plug 'elixir-editors/vim-elixir' -- [x] elixir support 
+Plug 'sheerun/vim-polyglot'      -- [x] syntax support
+Plug 'fatih/vim-go'              -- [x] golang support
+Plug 'rust-lang/rust.vim'        -- [x] rust support
 
-Plug 'neovim/nvim-lspconfig'           -- [ ] nvim lsp
-Plug 'williamboman/nvim-lsp-installer' -- [ ] creates an LspInstall command
-Plug 'hrsh7th/cmp-nvim-lsp'            -- [ ] cmp nvim 
-Plug 'hrsh7th/cmp-buffer'              -- [ ] cmp for buffers
-Plug 'hrsh7th/cmp-path'                -- [ ] cmp for paths
-Plug 'hrsh7th/cmp-cmdline'             -- [ ] cmp for command line
-Plug 'hrsh7th/nvim-cmp'                -- [ ] cmp nvim plugin
-Plug 'hrsh7th/cmp-vsnip'               -- [ ] cmp snippets
-Plug 'hrsh7th/vim-vsnip'               -- [ ] cmp snippets
+Plug 'neovim/nvim-lspconfig'    -- [ ] nvim lsp
+Plug 'hrsh7th/cmp-nvim-lsp'     -- [ ] cmp nvim
+Plug 'hrsh7th/cmp-buffer'       -- [ ] cmp for buffers
+Plug 'hrsh7th/cmp-path'         -- [ ] cmp for paths
+Plug 'hrsh7th/cmp-cmdline'      -- [ ] cmp for command line
+Plug 'hrsh7th/nvim-cmp'         -- [ ] cmp nvim plugin
+Plug 'hrsh7th/cmp-vsnip'        -- [ ] cmp snippets
+Plug 'hrsh7th/vim-vsnip'        -- [ ] cmp snippets
+Plug 'onsails/lspkind.nvim'     -- [ ] hints for object types
 
 Plug 'nvim-lua/plenary.nvim'                    -- [x] for fuzzy finder
 Plug 'nvim-telescope/telescope.nvim'            -- [x] for fuzzy finder
@@ -106,27 +104,31 @@ Plug 'projekt0n/github-nvim-theme' -- [x] github theme
 
 vim.call('plug#end')
 
--- setting the colorscheme easily; this should be done within the 
+-- setting the colorscheme easily; this should be done within the
 -- plugin/color.vim script
 -- g.colorscheme = "gruvbox"
 -- g.colorscheme = "github_*"
 g.colorscheme = "kanagawa"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
--- TODO: need to update this to use kitty instead
-g.slime_target = "tmux"
+g.slime_target = "kitty"
+
+
+----------------------------- VIM SLIME ------------------------------------------------------
+require("which-key").setup{}
+
 
 ----------------------------- TREE-SITTER ----------------------------------------------------
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { 
-        "elixir", 
-        "go", 
+    ensure_installed = {
+        "elixir",
+        "go",
         "haskell",
-        "javascript", 
-        "lua", 
-        "norg", 
-        "python", 
-        "rust", 
+        "javascript",
+        "lua",
+        "norg",
+        "python",
+        "rust",
     },
     highlight = { enable = true },
 }
@@ -138,7 +140,7 @@ vim.keymap.set("n", "<leader>wv", "<cmd>:vsplit<cr>", {}) -- split window vertic
 vim.keymap.set("n", "<leader>wh", "<cmd>:split<cr>", {})  -- split window horizontally
 
 vim.keymap.set("n", "<leader>w<Left>", "<C-w>h", {})      -- move to left window
-vim.keymap.set("n", "<leader>w<Right>", "<C-w>l", {})     -- move to right window 
+vim.keymap.set("n", "<leader>w<Right>", "<C-w>l", {})     -- move to right window
 vim.keymap.set("n", "<leader>w<Down>", "<C-w>j", {})      -- move to down window
 vim.keymap.set("n", "<leader>w<Up>", "<C-w>k", {})        -- move to up window
 
@@ -146,7 +148,7 @@ vim.keymap.set("n", "<leader>b", "<C-o>", {})             -- go to previous curs
 
 
 ----------------------------- TELESCOPE SETTINGS ---------------------------------------------
--- need to make sure the ripgrep is installed onto the machine so that you can 
+-- need to make sure the ripgrep is installed onto the machine so that you can
 -- use live_grep within telescope.
 vim.keymap.set("n", "<leader>ff", require('telescope.builtin').find_files, {})
 vim.keymap.set("n", "<leader>fg", require('telescope.builtin').live_grep, {})
