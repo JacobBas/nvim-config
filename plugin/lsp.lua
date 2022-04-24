@@ -2,7 +2,7 @@ local lspconfig = require('lspconfig')
 
 -- updating the capabilities so that the lsp knows to use snippets
 -- Setup nvim-cmp.
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
   snippet = {
@@ -17,12 +17,12 @@ cmp.setup({
   },
   mapping = {
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<Left>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-    ['<Right>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+    ['<s-tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+    ['<tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
+    { name = 'vsnip' },
   }, {
     { name = 'buffer' },
   })
@@ -78,32 +78,32 @@ table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 lspconfig.sumneko_lua.setup({
-  cmd = {path_to_language_servers .. '/lua-language-server/bin/lua-language-server'},
-  capabilities = capabilities,
-  on_attach = on_attach,
+    cmd = {path_to_language_servers .. '/lua-language-server/bin/lua-language-server'},
+    capabilities = capabilities,
+    on_attach = on_attach,
     settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file('', true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+          -- Setup your lua path
+          path = runtime_path,
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { 'vim' },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file('', true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
       },
     },
-  },
-})
+  })
 
 
 -- elixir language server
@@ -133,6 +133,8 @@ lspconfig.elixirls.setup({
 -- make sure that gopls in the PATH variable https://hectron.github.io/til/gopls-asdf/
 lspconfig.gopls.setup({
     cmd = {"gopls", "serve"},
+    capabilities = capabilities,
+    on_attach = on_attach,
     settings = {
       gopls = {
         analyses = {
@@ -146,9 +148,16 @@ lspconfig.gopls.setup({
 
 -- Python language server
 -- npm install -g pyright
-lspconfig.pyright.setup{}
+lspconfig.pyright.setup({
+    cmd = {"pyright-langserver", "--stdio"},
+    capabilities = capabilities,
+    on_attach = on_attach,
+  })
 
 
 -- Javascript/Typescrupt language server
 -- npm install -g typescript typescript-language-server
-lspconfig.tsserver.setup{}
+lspconfig.tsserver.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+  })
