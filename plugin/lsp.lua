@@ -2,32 +2,52 @@ local lspconfig = require('lspconfig')
 
 -- updating the capabilities so that the lsp knows to use snippets
 -- Setup nvim-cmp.
+local luasnip = require('luasnip')
 local cmp = require('cmp')
 
-cmp.setup({
+-- nvim-cmp setup
+cmp.setup {
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      luasnip.lsp_expand(args.body)
     end,
   },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
-  },
-  mapping = {
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<s-tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-    ['<tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-  }, {
-    { name = 'buffer' },
-  })
-})
 
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  }),
+
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
+
+-- I believe that this stuff below is handling the neovim command line autocomplete
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   sources = {
@@ -45,13 +65,12 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 -- A callback that will get called when a buffer connects to the language server.
 -- Here we create any key maps that we want to have on that buffer.
-local on_attach = function(_, _)
-  local map_opts = {noremap = true, silent = true}
+local on_attach = function(_, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
+  local map_opts = {noremap = true, silent = true}
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, map_opts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, map_opts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, map_opts)
@@ -60,9 +79,6 @@ local on_attach = function(_, _)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, map_opts)
   vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, map_opts)
   vim.keymap.set('n', '<leader>ar', vim.lsp.buf.rename, map_opts)
-
-  -- tell nvim-cmp about our desired capabilities
-  require("cmp_nvim_lsp").update_capabilities(capabilities)
 end
 
 
@@ -79,7 +95,6 @@ table.insert(runtime_path, 'lua/?/init.lua')
 
 lspconfig.sumneko_lua.setup({
     cmd = {path_to_language_servers .. '/lua-language-server/bin/lua-language-server'},
-    capabilities = capabilities,
     on_attach = on_attach,
     settings = {
       Lua = {
@@ -110,7 +125,6 @@ lspconfig.sumneko_lua.setup({
 -- https://github.com/elixir-lsp/elixir-ls
 lspconfig.elixirls.setup({
     cmd = {path_to_language_servers .. '/elixir-ls/language_server.sh'},
-    capabilities = capabilities,
     on_attach = on_attach,
     settings = {
       elixirLS = {
@@ -133,16 +147,8 @@ lspconfig.elixirls.setup({
 -- make sure that gopls in the PATH variable https://hectron.github.io/til/gopls-asdf/
 lspconfig.gopls.setup({
     cmd = {"gopls", "serve"},
-    capabilities = capabilities,
     on_attach = on_attach,
-    settings = {
-      gopls = {
-        analyses = {
-          unusedparams = true,
-        },
-        staticcheck = true,
-      },
-    },
+    single_file_support = true,
   })
 
 
@@ -150,7 +156,6 @@ lspconfig.gopls.setup({
 -- npm install -g pyright
 lspconfig.pyright.setup({
     cmd = {"pyright-langserver", "--stdio"},
-    capabilities = capabilities,
     on_attach = on_attach,
   })
 
@@ -158,6 +163,6 @@ lspconfig.pyright.setup({
 -- Javascript/Typescrupt language server
 -- npm install -g typescript typescript-language-server
 lspconfig.tsserver.setup({
-    capabilities = capabilities,
+    cmd = {"typescript-language-server", "--stdio"},
     on_attach = on_attach,
   })

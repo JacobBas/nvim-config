@@ -78,8 +78,10 @@ Plug 'hrsh7th/cmp-buffer'       -- [ ] cmp for buffers
 Plug 'hrsh7th/cmp-path'         -- [ ] cmp for paths
 Plug 'hrsh7th/cmp-cmdline'      -- [ ] cmp for command line
 Plug 'hrsh7th/nvim-cmp'         -- [ ] cmp nvim plugin
-Plug 'hrsh7th/cmp-vsnip'        -- [ ] cmp snippets
-Plug 'hrsh7th/vim-vsnip'        -- [ ] cmp snippets
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+-- Plug 'hrsh7th/cmp-vsnip'        -- [ ] cmp snippets
+-- Plug 'hrsh7th/vim-vsnip'        -- [ ] cmp snippets
 Plug 'onsails/lspkind.nvim'     -- [ ] hints for object types
 
 Plug 'nvim-lua/plenary.nvim'                    -- [x] for fuzzy finder
