@@ -166,3 +166,9 @@ lspconfig.tsserver.setup({
     cmd = {"typescript-language-server", "--stdio"},
     on_attach = on_attach,
   })
+
+-- Rust language server
+lspconfig.rust_analyzer.setup({
+    cmd = {"rustup", "run", "nightly", "rust-analyzer"},
+    on_attach = on_attach,
+  })
