@@ -92,6 +92,7 @@ Plug 'sharkdp/fd'                               -- [x] optional: finder
 Plug 'nvim-treesitter/nvim-treesitter'          -- [x] optional: finder/preview
 Plug 'nvim-treesitter/playground'               -- [x] for looking through tree-sitter output
 Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 Plug 'nvim-neorg/neorg'             -- [x] for notetaking within nvim
 Plug 'nvim-neorg/neorg-telescope'   -- [x] telescope integration with neorg
@@ -101,23 +102,23 @@ Plug 'kyazdani42/nvim-web-devicons' -- [x] for nice looking icons
 Plug 'nvim-lualine/lualine.nvim'    -- [x] for a nice status line
 Plug 'kdheepak/lazygit.nvim'        -- [x] lazygit integration
 
-Plug 'morhetz/gruvbox' -- [x] gruvbox theme
 Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
 Plug 'projekt0n/github-nvim-theme' -- [x] github theme
+Plug 'ellisonleao/gruvbox.nvim'
 
 vim.call('plug#end')
 
 -- setting the colorscheme easily; this should be done within the
 -- plugin/color.vim script
--- g.colorscheme = "gruvbox"
 -- g.colorscheme = "github_*"
-g.colorscheme = "kanagawa"
+-- g.colorscheme = "kanagawa"
+g.colorscheme = "gruvbox"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
 g.slime_target = "kitty"
 
 
------------------------------ VIM SLIME ------------------------------------------------------
+----------------------------- WHICH KEY ------------------------------------------------------
 require("which-key").setup{}
 
 
