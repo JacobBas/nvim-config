@@ -38,6 +38,7 @@ opt.hlsearch = false
 opt.scrolloff = 8
 opt.number = true
 opt.hidden = true
+-- opt.cmdheight = 0
 
 opt.swapfile = false
 opt.backup = false
