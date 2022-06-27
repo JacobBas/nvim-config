@@ -80,9 +80,7 @@ Plug 'hrsh7th/cmp-path'         -- [ ] cmp for paths
 Plug 'hrsh7th/cmp-cmdline'      -- [ ] cmp for command line
 Plug 'hrsh7th/nvim-cmp'         -- [ ] cmp nvim plugin
 Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
--- Plug 'hrsh7th/cmp-vsnip'        -- [ ] cmp snippets
--- Plug 'hrsh7th/vim-vsnip'        -- [ ] cmp snippets
+Plug 'L3MON4D3/LuaSnip'         -- [ ] cmp snippets
 Plug 'onsails/lspkind.nvim'     -- [ ] hints for object types
 
 Plug 'nvim-lua/plenary.nvim'                    -- [x] for fuzzy finder
@@ -114,8 +112,8 @@ vim.call('plug#end')
 -- setting the colorscheme easily; this should be done within the
 -- plugin/color.vim script
 -- g.colorscheme = "github_*"
-g.colorscheme = "kanagawa"
--- g.colorscheme = "gruvbox"
+-- g.colorscheme = "kanagawa"
+g.colorscheme = "gruvbox"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
 g.slime_target = "kitty"
@@ -141,6 +139,26 @@ require('nvim-treesitter.configs').setup {
     highlight = { enable = true },
 }
 
+----------------------------- TWILIGHT -------------------------------------------------------
+require("twilight").setup {
+  dimming = {
+    alpha = 0.35, -- amount of dimming
+    -- we try to get the foreground from the highlight groups or fallback color
+    color = { "Normal", "#ffffff" },
+    inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+  },
+  context = 15, -- amount of lines we will try to show around the current line
+  treesitter = true, -- use treesitter when available for the filetype
+  -- treesitter is used to automatically expand the visible text,
+  -- but you can further control the types of nodes that should always be fully expanded
+  expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+    "function",
+    "method",
+    "table",
+    "if_statement",
+  },
+  exclude = {}, -- exclude these filetypes
+}
 
 ----------------------------- ZEN MODE -------------------------------------------------------
 local true_zen = require("true-zen")
@@ -165,11 +183,11 @@ true_zen.setup({
 	},
 	modes = {
 		ataraxis = {
-			left_padding = 32,
-			right_padding = 32,
+			left_padding = 20,
+			right_padding = 20,
 			top_padding = 1,
 			bottom_padding = 1,
-			ideal_writing_area_width = {0},
+			ideal_writing_area_width = {100},
 			auto_padding = true,
 			keep_default_fold_fillchars = true,
 			custom_bg = {"none", ""},
@@ -192,18 +210,18 @@ true_zen.setup({
 		},
 	},
 	integrations = {
-		vim_gitgutter = false,
+		vim_gitgutter = true,
 		galaxyline = false,
 		tmux = false,
 		gitsigns = false,
 		nvim_bufferline = false,
 		limelight = false,
-		twilight = false,
+		twilight = true,
 		vim_airline = false,
 		vim_powerline = false,
 		vim_signify = false,
 		express_line = false,
-		lualine = false,
+		lualine = true,
 		lightline = false,
 		feline = false
 	},
@@ -213,6 +231,9 @@ true_zen.setup({
 		cursor_by_mode = false,
 	}
 })
+
+vim.keymap.set("n", "<leader>zf", [[<Cmd>TZFocus<CR>]], {})
+vim.keymap.set("n", "<leader>za", [[<Cmd>TZAtaraxis<CR>]], {})
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
 -- creating, resizing, and moving between windows

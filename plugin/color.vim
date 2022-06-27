@@ -3,8 +3,8 @@ fun! ColorMyPencils()
         set background=dark
         colorscheme gruvbox
 
-        hi CursorLineNR guibg=None
-        highlight Normal guibg=none
+        " hi CursorLineNR guibg=None
+        " highlight Normal guibg=none
         highlight LineNr guifg=#ff8659
         highlight LineNr guifg=#aed75f
         highlight LineNr guifg=#5eacd3
