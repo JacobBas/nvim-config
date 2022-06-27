@@ -38,7 +38,7 @@ opt.hlsearch = false
 opt.scrolloff = 8
 opt.number = true
 opt.hidden = true
-opt.cmdheight = 0
+-- opt.cmdheight = 0
 
 opt.swapfile = false
 opt.backup = false
@@ -106,13 +106,16 @@ Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
 Plug 'projekt0n/github-nvim-theme' -- [x] github theme
 Plug 'ellisonleao/gruvbox.nvim'
 
+Plug 'folke/twilight.nvim'  -- [x] for focus mode
+Plug 'Pocco81/TrueZen.nvim' -- [x] for zen mode
+
 vim.call('plug#end')
 
 -- setting the colorscheme easily; this should be done within the
 -- plugin/color.vim script
 -- g.colorscheme = "github_*"
--- g.colorscheme = "kanagawa"
-g.colorscheme = "gruvbox"
+g.colorscheme = "kanagawa"
+-- g.colorscheme = "gruvbox"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
 g.slime_target = "kitty"
@@ -138,6 +141,78 @@ require('nvim-treesitter.configs').setup {
     highlight = { enable = true },
 }
 
+
+----------------------------- ZEN MODE -------------------------------------------------------
+local true_zen = require("true-zen")
+
+true_zen.setup({
+	ui = {
+		bottom = {
+			laststatus = 0,
+			ruler = false,
+			showmode = false,
+			showcmd = false,
+			cmdheight = 1,
+		},
+		top = {
+			showtabline = 0,
+		},
+		left = {
+			number = false,
+			relativenumber = false,
+			signcolumn = "no",
+		},
+	},
+	modes = {
+		ataraxis = {
+			left_padding = 32,
+			right_padding = 32,
+			top_padding = 1,
+			bottom_padding = 1,
+			ideal_writing_area_width = {0},
+			auto_padding = true,
+			keep_default_fold_fillchars = true,
+			custom_bg = {"none", ""},
+			bg_configuration = true,
+			quit = "untoggle",
+			ignore_floating_windows = true,
+			affected_higroups = {
+				NonText = true,
+				FoldColumn = true,
+				ColorColumn = true,
+				VertSplit = true,
+				StatusLine = true,
+				StatusLineNC = true,
+				SignColumn = true,
+			},
+		},
+		focus = {
+			margin_of_error = 5,
+			focus_method = "experimental"
+		},
+	},
+	integrations = {
+		vim_gitgutter = false,
+		galaxyline = false,
+		tmux = false,
+		gitsigns = false,
+		nvim_bufferline = false,
+		limelight = false,
+		twilight = false,
+		vim_airline = false,
+		vim_powerline = false,
+		vim_signify = false,
+		express_line = false,
+		lualine = false,
+		lightline = false,
+		feline = false
+	},
+	misc = {
+		on_off_commands = false,
+		ui_elements_commands = false,
+		cursor_by_mode = false,
+	}
+})
 
 ----------------------------- CUSTOM MAPPINGS ------------------------------------------------
 -- creating, resizing, and moving between windows
