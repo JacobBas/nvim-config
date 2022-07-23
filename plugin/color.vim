@@ -29,6 +29,27 @@ fun! ColorMyPencils()
         colorscheme kanagawa
     endif
 
+    if g:colorscheme == "everforest"
+        " Important!!
+        if has('termguicolors')
+          set termguicolors
+        endif
+
+        " For dark version.
+        set background=dark
+
+        " Set contrast.
+        " This configuration option should be placed before `colorscheme everforest`.
+        " Available values: 'hard', 'medium'(default), 'soft'
+        let g:everforest_background = 'hard'
+        let g:everforest_enable_italic = 1
+
+        " For better performance
+        let g:everforest_better_performance = 1
+
+        colorscheme everforest
+    endif
+
     " allowing for background transparency
     " hi Normal guibg=NONE ctermbg=NONE
 endfun

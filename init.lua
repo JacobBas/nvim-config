@@ -103,6 +103,7 @@ Plug 'kdheepak/lazygit.nvim'        -- [x] lazygit integration
 Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
 Plug 'projekt0n/github-nvim-theme' -- [x] github theme
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'sainnhe/everforest' -- [x] everforest theme
 
 Plug 'folke/twilight.nvim'  -- [x] for focus mode
 Plug 'Pocco81/TrueZen.nvim' -- [x] for zen mode
@@ -113,7 +114,8 @@ vim.call('plug#end')
 -- plugin/color.vim script
 -- g.colorscheme = "github_*"
 -- g.colorscheme = "kanagawa"
-g.colorscheme = "gruvbox"
+-- g.colorscheme = "gruvbox"
+g.colorscheme = "everforest"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
 g.slime_target = "kitty"
