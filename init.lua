@@ -92,6 +92,8 @@ Plug 'nvim-treesitter/playground'               -- [x] for looking through tree-
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 
+Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' -- [x] better formatted lsp warnings
+
 Plug 'nvim-neorg/neorg'             -- [x] for notetaking within nvim
 Plug 'nvim-neorg/neorg-telescope'   -- [x] telescope integration with neorg
 Plug 'ggandor/lightspeed.nvim'      -- [x[ for easy vim movements
@@ -113,17 +115,40 @@ vim.call('plug#end')
 -- setting the colorscheme easily; this should be done within the
 -- plugin/color.vim script
 -- g.colorscheme = "github_*"
--- g.colorscheme = "kanagawa"
+g.colorscheme = "kanagawa"
 -- g.colorscheme = "gruvbox"
-g.colorscheme = "everforest"
+-- g.colorscheme = "everforest"
 
 ----------------------------- VIM SLIME ------------------------------------------------------
 g.slime_target = "kitty"
 
 
+----------------------------- LSP LINES ------------------------------------------------------
+require("lsp_lines").setup()
+
+-- making sure that are defaults are set to the correct values
+vim.diagnostic.config({
+	virtual_lines = true,
+	update_in_insert = true,
+})
+require("lsp_lines").toggle()
+
+local function toggle_lsp_lines()
+    vim.diagnostic.config({
+			virtual_text = not vim.diagnostic.config()["virtual_text"],
+		})
+    require("lsp_lines").toggle()
+end
+
+vim.keymap.set(
+  "",
+  "<Leader>d",
+  toggle_lsp_lines,
+  { desc = "Toggle lsp_lines" }
+)
+
 ----------------------------- WHICH KEY ------------------------------------------------------
 require("which-key").setup{}
-
 
 ----------------------------- TREE-SITTER ----------------------------------------------------
 require('nvim-treesitter.configs').setup {
@@ -141,31 +166,8 @@ require('nvim-treesitter.configs').setup {
     highlight = { enable = true },
 }
 
------------------------------ TWILIGHT -------------------------------------------------------
-require("twilight").setup {
-  dimming = {
-    alpha = 0.35, -- amount of dimming
-    -- we try to get the foreground from the highlight groups or fallback color
-    color = { "Normal", "#ffffff" },
-    inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
-  },
-  context = 15, -- amount of lines we will try to show around the current line
-  treesitter = true, -- use treesitter when available for the filetype
-  -- treesitter is used to automatically expand the visible text,
-  -- but you can further control the types of nodes that should always be fully expanded
-  expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
-    "function",
-    "method",
-    "table",
-    "if_statement",
-  },
-  exclude = {}, -- exclude these filetypes
-}
-
 ----------------------------- ZEN MODE -------------------------------------------------------
-local true_zen = require("true-zen")
-
-true_zen.setup({
+require("true-zen").setup({
 	ui = {
 		bottom = {
 			laststatus = 0,
@@ -218,7 +220,7 @@ true_zen.setup({
 		gitsigns = false,
 		nvim_bufferline = false,
 		limelight = false,
-		twilight = true,
+		twilight = false,
 		vim_airline = false,
 		vim_powerline = false,
 		vim_signify = false,
