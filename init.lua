@@ -70,7 +70,8 @@ Plug 'airblade/vim-gitgutter'      -- [x] git gutter
 Plug 'sindrets/diffview.nvim'      -- [x] for showing git diffs
 
 Plug 'sheerun/vim-polyglot'      -- [x] syntax support
-Plug 'fatih/vim-go'              -- [x] golang support
+Plug 'ray-x/go.nvim'
+Plug 'ray-x/guihua.lua'
 Plug 'rust-lang/rust.vim'        -- [x] rust support
 
 Plug 'neovim/nvim-lspconfig'    -- [ ] nvim lsp
@@ -92,22 +93,20 @@ Plug 'nvim-treesitter/playground'               -- [x] for looking through tree-
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 
+Plug 'danymat/neogen' -- [x] automatic docgenerator
+
 Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' -- [x] better formatted lsp warnings
 
-Plug 'nvim-neorg/neorg'             -- [x] for notetaking within nvim
-Plug 'nvim-neorg/neorg-telescope'   -- [x] telescope integration with neorg
 Plug 'ggandor/lightspeed.nvim'      -- [x[ for easy vim movements
 
 Plug 'kyazdani42/nvim-web-devicons' -- [x] for nice looking icons
 Plug 'nvim-lualine/lualine.nvim'    -- [x] for a nice status line
-Plug 'kdheepak/lazygit.nvim'        -- [x] lazygit integration
 
 Plug "rebelot/kanagawa.nvim" -- [x] kanagawa
 Plug 'projekt0n/github-nvim-theme' -- [x] github theme
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'sainnhe/everforest' -- [x] everforest theme
 
-Plug 'folke/twilight.nvim'  -- [x] for focus mode
 Plug 'Pocco81/TrueZen.nvim' -- [x] for zen mode
 
 vim.call('plug#end')
@@ -122,6 +121,22 @@ g.colorscheme = "kanagawa"
 ----------------------------- VIM SLIME ------------------------------------------------------
 g.slime_target = "kitty"
 
+----------------------------- NEOGEN ---------------------------------------------------------
+require('neogen').setup{}
+vim.keymap.set(
+  "",
+  "<Leader><leader>d",
+  require('neogen').generate,
+  { desc = "add in docstring to a function" }
+)
+
+----------------------------- GO.NVIM --------------------------------------------------------
+require('go').setup()
+-- Run gofmt + goimport on save
+vim.api.nvim_exec(
+	[[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]],
+	false
+)
 
 ----------------------------- LSP LINES ------------------------------------------------------
 require("lsp_lines").setup()
